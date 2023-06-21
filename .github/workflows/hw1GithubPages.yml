@@ -49,15 +49,21 @@ jobs:
           cache: ${{ steps.detect-package-manager.outputs.manager }}
           node-version-file: Week-1/Assignment-1/.nvmrc
           cache-dependency-path: Week-1/Assignment-1/package-lock.json
+      - name: Install dependencies
+        working-directory: Week-1/Assignment-1
+        run: ${{ steps.detect-package-manager.outputs.manager }} install
+      - name: Copy nuxt.config.ts
+        working-directory: Week-1/Assignment-1
+        run: |
+          cp nuxt.config.ts nuxt.config.js
       - name: Setup Pages
         uses: actions/configure-pages@v3
         with:
           # Automatically inject router.base in your Nuxt configuration file and set
           # target to static (https://nuxtjs.org/docs/configuration-glossary/configuration-target/).
           static_site_generator: "nuxt"
-      - name: Install dependencies
-        working-directory: Week-1/Assignment-1
-        run: ${{ steps.detect-package-manager.outputs.manager }} install
+          # point to nuxt config
+          generator_config_file: "Week-1/Assignment-1/nuxt.config.js"
       - name: Static HTML export with Nuxt
         working-directory: Week-1/Assignment-1
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate
