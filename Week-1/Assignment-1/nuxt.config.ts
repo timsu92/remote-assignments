@@ -4,4 +4,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
   ],
+  app: {
+    baseURL: "/remote-assignments/Week-1/Assignment-1"
+  }
 })
